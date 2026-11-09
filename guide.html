@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explorer Guide</title>
+<style>
+  :root { --ink: #0b0b0b; --ink2: #47463f; --muted: #7a7873; --rule: #e1e0d9; --wash: #f3f2ee; --accent: #0e7c86; --accentw: #e3f1f2; }
+  * { box-sizing: border-box; }
+  html { background: #e9e8e3; }
+  body { margin: 0; color: var(--ink); font: 8.8pt/1.34 system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .page { width: 8.5in; height: 11in; margin: 0.3in auto; background: #fff; padding: 0.4in 0.45in 0.5in; overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,.15); position: relative; }
+  @page { size: Letter; margin: 0; }
+  @media print { html { background: #fff; } .page { margin: 0; box-shadow: none; page-break-after: always; } }
+  h1 { font-size: 14pt; margin: 0; letter-spacing: -.01em; }
+  h2 { font-size: 9.6pt; margin: 8px 0 3px; color: var(--accent); }
+  h3 { font-size: 9pt; margin: 0 0 2px; }
+  p { margin: 0 0 3px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--accent); padding-bottom: 4px; margin-bottom: 6px; }
+  .head .sub { color: var(--muted); font-size: 7.8pt; text-align: right; line-height: 1.25; }
+  .lead { color: var(--ink2); }
+  .fig { display: grid; grid-template-columns: 4.75in 1fr; gap: 11px; margin-top: 5px; align-items: start; }
+  .shot { position: relative; border: 1px solid var(--rule); border-radius: 5px; overflow: hidden; }
+  .shot img { display: block; width: 100%; }
+  .badge { position: absolute; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 7.5pt;
+    font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 1.5px #fff; transform: translate(-50%, -50%); }
+  ol.keys { margin: 0; padding: 0; list-style: none; counter-reset: k; font-size: 8.3pt; line-height: 1.3; }
+  ol.keys li { counter-increment: k; position: relative; padding-left: 19px; margin-bottom: 3.5px; }
+  ol.keys li::before { content: counter(k); position: absolute; left: 0; top: 0; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 7pt; font-weight: 700; display: grid; place-items: center; }
+  .ideas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 7px; }
+  .idea { background: var(--wash); border-radius: 5px; padding: 5px 7px; font-size: 8.3pt; }
+  .idea b { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; font-size: 8.3pt; }
+  th { text-align: left; color: var(--ink2); font-weight: 600; border-bottom: 1px solid #c3c2b7; padding: 1.5px 5px; }
+  td { border-bottom: 1px solid var(--rule); padding: 2px 5px; vertical-align: top; }
+  td:first-child { white-space: nowrap; font-weight: 600; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  dl.gl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 1.5px 7px; font-size: 8.3pt; }
+  dl.gl dt { font-weight: 600; } dl.gl dd { margin: 0; color: var(--ink2); }
+  .foot { position: absolute; bottom: 0.28in; left: 0.45in; right: 0.45in; font-size: 7pt; color: var(--muted); display: flex; justify-content: space-between;
+    border-top: 1px solid var(--rule); padding-top: 3px; }
+  .box { background: var(--wash); border-radius: 5px; padding: 5px 8px; }
+  .q { border-left: 3px solid var(--accent); padding: 0 0 0 8px; margin-top: 6px; }
+  .q h3 { font-size: 9.4pt; }
+  .q .claim { font-weight: 600; margin-bottom: 1px; }
+  ul { margin: 0; padding-left: 14px; } li { margin-bottom: 1.5px; }
+  .num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .tag { display: inline-block; font-size: 7pt; padding: 0 5px; border-radius: 8px; background: var(--accentw); color: var(--accent); font-weight: 600; margin-left: 4px; }
+  .warn { color: #8a3a12; font-weight: 600; }
+  .refs { font-size: 7pt; color: var(--muted); line-height: 1.28; margin-top: 5px; }
+  .kbd { font-size: 7.8pt; color: var(--ink2); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE 1 · TOOL GUIDE ============================== -->
+<section class="page">
+  <div class="head">
+    <h1>Macaque Hippocampus Explorer · How to use it</h1>
+    <div class="sub">For neuroscientists — no coding or statistics needed<br>Page 1 of 2</div>
+  </div>
+  <p class="lead">The explorer shows about <b>139,000 single cells</b> from <b>7 sections of one macaque hippocampus</b>, measured with spatial transcriptomics (Stereo-seq; Fei et al., 2026).
+    For every cell we know <i>where</i> it sits and <i>which genes</i> it expresses. Double-click <b>index.html</b> (with the guided tour) or <b>explore.html</b> (no tour) in a web browser; nothing to install, no internet needed.</p>
+
+  <div class="fig">
+    <div class="shot"><img src="guide_screenshot.png" alt="Annotated screenshot of the explorer">
+      <span class="badge" style="left:1.3%;top:11.7%">1</span>
+      <span class="badge" style="left:1.3%;top:35.5%">2</span>
+      <span class="badge" style="left:20.2%;top:9.2%">3</span>
+      <span class="badge" style="left:42.7%;top:15.1%">4</span>
+      <span class="badge" style="left:42.7%;top:9.2%">5</span>
+      <span class="badge" style="left:72.5%;top:15.1%">6</span>
+      <span class="badge" style="left:42.7%;top:58.3%">7</span>
+      <span class="badge" style="left:86.3%;top:2.8%">8</span>
+    </div>
+    <ol class="keys">
+      <li><b>Guided tour.</b> 6 short steps, one question each; every step sets up all views. <i>Exit tour</i> (top right) shows all controls at once.</li>
+      <li><b>Controls</b> for the step. <i>Sections</i>: tick those in scope; <i>Only focus</i> = single-section view.</li>
+      <li><b>Sections in 3D.</b> All 7 sections stacked by position. Drag to rotate; click a name to focus on it.</li>
+      <li><b>Tissue map — “where?”</b> Each dot is a cell at its real position in the focus section.</li>
+      <li><b>Toolbar.</b> View: <i>One section</i> · <i>UMAP sensitivity</i> · <i>All sections</i>; and <i>Colour cells by</i> region, cell type, a gene…</li>
+      <li><b>UMAP — “who is similar?”</b> DG cells re-drawn so similar gene activity sits close together. Not anatomy.</li>
+      <li><b>Evidence panel.</b> Charts and tables that answer the step's question.</li>
+      <li><b>Tour &amp; help.</b> Start / exit the tour, <i>?</i> = welcome card, <i>Guide</i> = this sheet. Hover any <b>ⓘ</b> for a definition.</li>
+    </ol>
+  </div>
+
+  <div class="ideas">
+    <div class="idea"><b>Two maps, one cell.</b> The tissue map shows <i>where</i>; the UMAP shows <i>which cells are alike</i>. Hovering a cell in one rings it in the other.</div>
+    <div class="idea"><b>Everything is linked.</b> Colour, selection and focus section are shared by every view. Click several legend entries to show several cell types; <i>Select these cells</i> makes them the selection.</div>
+    <div class="idea"><b>Compare within a section.</b> Sections were sequenced to different depths, so brightness can differ for technical reasons. Trust region-vs-region contrasts.</div>
+  </div>
+
+  <h2>The tour at a glance</h2>
+  <table>
+    <tr><th>Step</th><th>Question</th><th>What to look at / try</th></tr>
+    <tr><td>1 Start</td><td>What data do we have?</td><td>Section table and quality histograms; colour by <i>Quality control</i>.</td></tr>
+    <tr><td>2 Q1 Cells</td><td>Which cell types live where?</td><td>Cell-type bars for DG vs CA1, section by section; click a legend entry.</td></tr>
+    <tr><td>3 Q1 Genes</td><td>Do markers light up the same region everywhere?</td><td>Gene × section grid of the paper's markers; the 3D stack follows one gene.</td></tr>
+    <tr><td>4 Q2 Groups</td><td>What makes a group of DG cells distinct?</td><td>Heatmap of stem-cell markers per group; top genes and labels of the selection.</td></tr>
+    <tr><td>5 Q2 Niche</td><td>Do stem-cell-like cells sit next to astrocytes?</td><td>Tiles and curve vs. the gray <i>chance</i> band; switch to <i>within astrocytes</i>.</td></tr>
+    <tr><td>6 Q3 Sensitivity</td><td>How sensitive is the UMAP? <i>(only view with embedding quality)</i></td><td>Two settings side by side; red rings = misleading positions; lens shows true neighbours.</td></tr>
+    <tr><td>No tour</td><td>Your own question</td><td><i>Exit tour</i> or open explore.html; all controls at once.</td></tr>
+  </table>
+
+  <div class="two" style="margin-top:2px">
+    <div><h2>Words you will meet</h2>
+      <dl class="gl">
+        <dt>Expression</dt><dd>RNA molecules per 10,000 in the cell, on a log scale.</dd>
+        <dt>UMAP</dt><dd>2D similarity map of gene activity; distances are approximate.</dd>
+        <dt>DG group</dt><dd>Cells grouped automatically by similarity (Leiden); numbers are arbitrary.</dd>
+        <dt>NSC score</dt><dd>Average of stem-cell markers (SOX2, NES, HOPX, VIM, GFAP, DCX), 0–1.</dd>
+      </dl></div>
+    <div><h2>&nbsp;</h2>
+      <dl class="gl">
+        <dt>Chance, z, p</dt><dd>Labels shuffled 199×; z &gt; 2 or p &lt; 0.05 = more than chance.</dd>
+        <dt>Dubious cell</dt><dd>Its UMAP neighbours differ from its gene-space neighbours (scDEED).</dd>
+        <dt>Regions</dt><dd>DG dentate gyrus · CA1–4 · SUB, proS, preS, paraS = subicular complex.</dd>
+        <dt>Sections</dt><dd>Ordered by position (ebz, mm). One ticked = single-section statistics.</dd>
+      </dl></div>
+  </div>
+  <p class="kbd"><b>Mouse &amp; keys:</b> hover = details · click a group = select · click legend entries = show / hide (several) · drag = lasso (or <i>Pan</i>) · scroll = zoom · <b>Esc</b> = clear selection · <b>← →</b> = tour steps.</p>
+
+  <div class="foot"><span>Macaque Hippocampus Explorer · N. Bejarano &amp; Z. Chen · Biomedical Visual Analytics, NYU, Fall 2026</span><span>Data: Fei et al., Natl Sci Rev 2026, nwaf595</span></div>
+</section>
+
+<!-- ============================== PAGE 2 · FINDINGS ============================== -->
+<section class="page">
+  <div class="head">
+    <h1>What the data show · Findings for Q1–Q3</h1>
+    <div class="sub">7 Stereo-seq sections (of 30 cut 0.5 mm apart), one adult macaque<br>Page 2 of 2</div>
+  </div>
+
+  <div class="box two" style="gap:12px">
+    <div><h3>Background · hippocampal subregions</h3>
+      <p>Signals flow DG → CA3 → CA1 → subiculum. Fei et al. (2026) mapped this architecture in mouse, marmoset and macaque. They report subregion markers
+      <b>conserved across species</b> (PROX1 = DG granule cells, FIBCD1 = CA1, HOMER3 = CA3/4, NTS = subiculum), primate-specific layered cell types in the
+      subicular complex, and a convergence of CA3 and CA4 in primates.</p></div>
+    <div><h3>Background · adult neurogenesis</h3>
+      <p>In rodents, radial glia-like stem cells (GFAP, SOX2, NES, HOPX, VIM) in the subgranular zone of the DG produce dividing progenitors (EOMES, ASCL1, MKI67)
+      and then immature neurons (DCX). Whether this continues in adult primates is debated. Single-cell studies find precursor populations in macaque
+      (Hao et al., 2022) but not in adult human (Franjic et al., 2022).</p></div>
+  </div>
+
+  <div class="q">
+    <h3>Q1 · Where are cells and genes? <span class="tag">robust in 7/7 sections</span></h3>
+    <p class="claim">Subregion identity is stable along the hippocampus; absolute expression levels are not comparable between sections.</p>
+    <ul>
+      <li><b>The paper's conserved markers reproduce in every section:</b> PROX1 <span class="num">6–13×</span> higher in DG than elsewhere, FIBCD1 <span class="num">8–23×</span> in CA1,
+        HOMER3 <span class="num">2–5×</span> in CA3/4, NTS <span class="num">6–41×</span> in subiculum. <span class="warn">Caveat:</span> the regions were partly defined from expression, so this is a consistency check.</li>
+      <li><b>Cell-type mix:</b> DG is <span class="num">62%</span> glutamatergic neurons (mostly granule cells; 56–70%) vs <span class="num">42%</span> in CA1. CA1 has <span class="num">18%</span> oligodendrocytes
+        vs <span class="num">5%</span> in DG, matching its higher myelin-gene (MBP) expression. Astrocytes are similar (26–27%).</li>
+      <li><b>Astrocyte genes split by region:</b> GFAP is higher in DG and the glutamate transporter SLC1A3 (GLAST) higher in CA1, in all 7 sections. Regionally specialised
+        astrocytes, or GFAP-rich radial-glia-like cells in DG? A hypothesis to test.</li>
+      <li><span class="warn">Levels between sections track sequencing depth</span> (median ρ = <span class="num">0.79</span> across 200 genes), so no anterior–posterior gradient is claimed yet.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <h3>Q2 · What distinguishes DG groups, and is there a stem-cell niche? <span class="tag">mostly a negative result</span></h3>
+    <p class="claim">Automatic groups recover the main cell classes, but stem/progenitor signals are too sparse to identify neurogenic cells.</p>
+    <ul>
+      <li><b>Groups ≈ cell classes:</b> 3–7 DG groups per section. Every section has an astrocyte group (87–98% pure in 6 sections, 67% in T37); oligodendrocyte and microglia groups appear in most. Granule neurons split in two;
+        in T25, T37 and T39 the split follows sequencing depth (technical), in T30/T36 it does not and may be biological.</li>
+      <li><b>Stem-cell markers are nearly absent:</b> per section only <span class="num">10–64</span> DG cells detect SOX2, <span class="num">4–20</span> NES, <span class="num">11–66</span> DCX
+        (out of 2,600–9,000); MKI67 (<span class="num">0–4</span>) and EOMES (<span class="num">0–1</span>) are essentially undetected.</li>
+      <li><b>“NSC-like” cells are astrocytes:</b> a high marker score marks <span class="num">0.5–1.9%</span> of DG cells, and <span class="num">85–96%</span> of them carry the published astrocyte label.</li>
+      <li><b>No niche beyond chance:</b> versus all DG cells, NSC-like cells touch astrocytes far more than chance (z = <span class="num">+7.7 to +16.5</span>, 7/7). Versus <i>other astrocytes</i> the effect
+        vanishes (z = <span class="num">0 to +2.5</span>; none significant after correcting for 7 tests). They are also not closer to granule neurons, so no subgranular-zone-like position is seen.</li>
+      <li><b>Meaning:</b> with ~250–830 RNA molecules per cell, this assay probably cannot resolve rare precursors that single-cell sequencing detects. Absence of evidence ≠ evidence of absence.</li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <h3>Q3 · Can we trust the UMAP? <span class="tag">mostly yes, except small groups</span></h3>
+    <p class="claim">The 2D maps are largely faithful, but the few misleading positions sit where over-interpretation is most tempting. (In the tool, see the <i>UMAP sensitivity</i> view.)</p>
+    <ul>
+      <li><b>Few dubious cells:</b> scDEED flags <span class="num">0.3–0.6%</span> of DG cells per section. The two settings (min_dist 0.1 vs 0.5) perform similarly, and only about half of the flagged
+        cells are flagged under both (overlap 0.36–0.79).</li>
+      <li><b>Small groups are least trustworthy:</b> dubious rate <span class="num">1.3–2.3%</span> in small groups (4 of the 5 sections that have them) vs <span class="num">~0.3%</span> in large ones. Reliability also rises with sequencing depth
+        (ρ = <span class="num">0.82</span>). Example: one flagged astrocyte keeps <b>0 of 15</b> true neighbours nearby on either UMAP.</li>
+    </ul>
+  </div>
+
+  <div class="box" style="margin-top:7px">
+    <h3>Limitations &amp; next steps</h3>
+    <ul>
+      <li>One animal, 7 of 30 sections. The coordinate scale (0.5 µm per unit) and which end of the section axis is anterior still need confirmation from the authors' methods.</li>
+      <li>Check the companion single-nucleus data (more genes per cell) for radial-glia-like and progenitor cells before re-testing the niche question.</li>
+      <li>Correct for sequencing depth before comparing levels along the long axis; register sections (e.g. PASTE) for true 3D analysis.</li>
+    </ul>
+  </div>
+
+  <p class="refs"><b>References.</b> Fei T. et al., Natl Sci Rev 13:nwaf595 (2026) · Hao Z.-Z. et al., Nat Neurosci 25:805 (2022) · Franjic D. et al., Neuron 110:452 (2022) ·
+    Xia L., Lee C., Li J.J., Nat Commun (2024), scDEED · Palla G. et al., Nat Methods (2022), Squidpy · Rashid R. et al., Nat Biomed Eng (2021), Minerva Story ·
+    Traag V. et al., Sci Rep (2019), Leiden · McInnes L. et al. (2018), UMAP. All numbers: <i>data/findings.json</i> (script <i>findings.py</i>).</p>
+
+  <div class="foot"><span>Exploratory analysis of public data. Groups, scores and statistics are descriptive, not proof of cell identity.</span><span>Page 2 of 2</span></div>
+</section>
+</body>
+</html>

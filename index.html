@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Macaque Hippocampus Explorer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <strong>Macaque Hippocampus Explorer</strong>
+    <span class="muted">Fei et al. 2026 · one macaque · Stereo-seq</span>
+  </div>
+  <nav class="steps" id="steps" aria-label="Guided steps"></nav>
+  <div class="selchip" id="selchip" hidden>
+    <span class="dot"></span><span id="seltext"></span>
+    <button id="selclear" title="Clear selection (Esc)">Clear</button>
+  </div>
+  <div class="helpbtns">
+    <button id="btn-tour" class="tourbtn" title="Turn the guided tour on or off"></button>
+    <button id="btn-welcome" title="Show the welcome card again">?</button>
+    <a class="btn" href="guide.html" target="_blank" rel="noopener" title="Two-page user guide and findings">Guide</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <section class="story">
+      <div class="story-top"><span class="muted">Guided tour</span><span class="muted" id="story-count"></span></div>
+      <h3 id="story-title"></h3>
+      <div id="story-text"></div>
+      <div class="row story-nav">
+        <button id="story-prev">← Back</button><button id="story-next" class="primary">Next →</button>
+        <button id="story-reset" title="Restore this step's view">Reset view</button>
+      </div>
+    </section>
+
+    <div class="ctl-head"><span>Controls for this step</span><button id="ctl-all" class="linkbtn"></button></div>
+
+    <section class="ctl" data-ctl="sections">
+      <h4>Sections <span class="info" data-help="sections">ⓘ</span>
+        <span class="scopebtns"><button id="scope-all" title="Use all 7 sections">All</button><button id="scope-one" title="Single-section view: only the focus section">Only focus</button></span></h4>
+      <div id="depth-strip"></div>
+    </section>
+
+    <section class="ctl" data-ctl="genes">
+      <h4>Genes <span class="muted">(up to 12)</span> <span class="info" data-help="genes">ⓘ</span></h4>
+      <div id="gene-chips" class="chips"></div>
+      <input id="gene-input" list="gene-options" placeholder="Type a gene name…" autocomplete="off">
+      <datalist id="gene-options"></datalist>
+      <div class="row presets">
+        <button data-preset="paper">Paper markers</button><button data-preset="slide">Slide markers</button><button data-preset="nsc">NSC markers</button><button data-preset="clear">Clear</button>
+      </div>
+      <h4 style="margin-top:8px">Hide weak expression below <output id="thr-out"></output></h4>
+      <input type="range" id="thr" min="0" max="0.9" step="0.05">
+    </section>
+
+    <section class="ctl" data-ctl="regions">
+      <h4>Regions to compare <span class="info" data-help="regions">ⓘ</span></h4>
+      <div id="region-list" class="checklist cols3"></div>
+    </section>
+
+    <section class="ctl" data-ctl="nsc">
+      <h4>NSC marker list <span class="info" data-help="nsc">ⓘ</span></h4>
+      <div id="nsc-chips" class="chips toggles"></div>
+      <p class="hint">Click to include / exclude a marker. Number = DG cells in this section where it is detected.</p>
+      <h4 style="margin-top:8px">Call a cell “NSC-like” above <output id="nsc-out"></output></h4>
+      <input type="range" id="nsc-thr" min="0.05" max="0.8" step="0.01">
+    </section>
+
+    <section class="ctl" data-ctl="ref">
+      <h4>Neighbour cell type <span class="info" data-help="ref">ⓘ</span></h4>
+      <select id="ref-type"></select>
+      <h4 style="margin-top:8px">“Close” means within <output id="rad-out"></output></h4>
+      <input type="range" id="radius" min="5" max="100" step="5">
+    </section>
+
+    <details class="ctl settings" data-ctl="settings">
+      <summary>Analysis settings</summary>
+      <dl id="settings"></dl>
+    </details>
+  </aside>
+
+  <main class="workspace">
+    <div class="panel" id="p-stack">
+      <div class="panel-h"><h3>Sections in 3D</h3><span class="info" data-help="stack">ⓘ</span>
+        <div class="tools"><span class="seg" id="stack-spacing"><button data-v="even">Even</button><button data-v="true">True gaps</button></span></div></div>
+      <div class="panel-h sub2"><span class="sub" id="stack-sub"></span>
+        <div class="tools hover-tools"><button data-sview="oblique">Tilted</button><button data-sview="side">Side</button><button data-sview="top">Top</button></div></div>
+      <div class="panel-b"><div class="plot" id="v-stack"></div>
+        <p class="note" style="margin:2px 0 0">Drag to rotate · scroll to zoom · click a section name to focus on it.</p></div>
+    </div>
+
+    <div class="panel" id="p-main">
+      <div class="panel-h">
+        <span class="seg" id="mv-view"><button data-v="section">One section</button><button data-v="compare" data-help="sensitivity">UMAP sensitivity</button><button data-v="grid">All sections</button></span>
+        <label class="inline">Colour cells by <select id="mv-color"></select></label>
+        <span class="toggles2">
+          <button id="t-trust" data-help="trust">Flag unreliable</button>
+          <button id="t-lens" data-help="lens">Neighbour lens</button>
+          <button id="t-links" data-help="links">Nearest-cell links</button>
+        </span>
+      </div>
+      <div class="legend mvleg" id="mv-legend"></div>
+      <div class="mv" id="mv">
+        <div class="mv-cell" id="mv-tissue"><div class="mv-h"><b>Tissue</b><span class="info" data-help="tissue">ⓘ</span><span class="sub" id="mv-tissue-sub"></span><div class="tools hover-tools" data-for="v-tissue"></div></div><div class="plot" id="v-tissue"></div></div>
+        <div class="mv-cell" id="mv-umapA"><div class="mv-h"><b>UMAP A</b><span class="info" data-help="umap">ⓘ</span><span class="sub" id="mv-umapA-sub"></span><div class="tools hover-tools" data-for="v-umapA"></div></div><div class="plot" id="v-umapA"></div></div>
+        <div class="mv-cell" id="mv-umapB"><div class="mv-h"><b>UMAP B</b><span class="info" data-help="umap">ⓘ</span><span class="sub" id="mv-umapB-sub"></span><div class="tools hover-tools" data-for="v-umapB"></div></div><div class="plot" id="v-umapB"></div></div>
+        <div class="mv-cell" id="mv-grid"><div class="scrollbox" id="v-grid"></div></div>
+      </div>
+      <div class="lens-readout" id="lens-readout" hidden></div>
+    </div>
+
+    <div class="panel" id="p-evid">
+      <div class="panel-h"><nav class="evtabs seg" id="ev-tabs"></nav><div class="ev-tools" id="ev-tools"></div></div>
+      <div class="ev-caption" id="ev-caption"></div>
+      <div class="panel-b" id="ev-body"></div>
+    </div>
+  </main>
+</div>
+
+<div class="welcome" id="welcome" hidden>
+  <div class="card">
+    <h2>Welcome to the Macaque Hippocampus Explorer</h2>
+    <ul>
+      <li><b>Every dot is one cell</b>, about 139,000 of them from 7 tissue sections of one macaque hippocampus.</li>
+      <li><b>Everything is linked.</b> Colour, selection and hover are shared by the 3D stack, the tissue map, the UMAP and the charts below.</li>
+      <li><b>Not sure what something means?</b> Hover any <span class="info">ⓘ</span> or button for a plain-language explanation.</li>
+    </ul>
+    <p class="muted">The guided tour walks through three questions: where cells and genes are (Q1), what makes a group of cells distinct (Q2), and whether the UMAP map can be trusted (Q3).</p>
+    <div class="row"><button id="wl-start" class="primary">Start the tour</button><button id="wl-skip">Explore without the tour</button><a class="btn" href="guide.html" target="_blank" rel="noopener">Read the 2-page guide</a></div>
+  </div>
+</div>
+
+<div class="loading" id="loading">Loading cells…</div>
+
+<script src="vendor/d3.min.js"></script>
+<script src="data/cells.js"></script>
+<script src="js/core.js"></script>
+<script src="js/scatter.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/stack3d.js"></script>
+<script src="js/encoding.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/views.js"></script>
+<script src="js/evidence.js"></script>
+<script src="js/story.js"></script>
+<script src="js/help.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
