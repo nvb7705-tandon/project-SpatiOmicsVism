@@ -1,0 +1,173 @@
+{
+  "runtime_s": 249.1,
+  "n_cells": 138827,
+  "panel_genes": 200,
+  "sections": [
+    {
+      "name": "T40",
+      "depth_mm": 3.72,
+      "n": 10357,
+      "qc_pass": 9677,
+      "dg_cells": 2603,
+      "clusters": 4,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 7,
+          "trustworthy": 2136,
+          "median_reliability": 0.3916040819834885
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 8,
+          "trustworthy": 2137,
+          "median_reliability": 0.3930608338241768
+        }
+      ]
+    },
+    {
+      "name": "T36",
+      "depth_mm": 4.73,
+      "n": 14143,
+      "qc_pass": 13354,
+      "dg_cells": 3674,
+      "clusters": 6,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 17,
+          "trustworthy": 3429,
+          "median_reliability": 0.48205532404952844
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 14,
+          "trustworthy": 3450,
+          "median_reliability": 0.4974492333551265
+        }
+      ]
+    },
+    {
+      "name": "T30",
+      "depth_mm": 6.23,
+      "n": 17455,
+      "qc_pass": 16719,
+      "dg_cells": 4083,
+      "clusters": 7,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 14,
+          "trustworthy": 3944,
+          "median_reliability": 0.5784946864593402
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 18,
+          "trustworthy": 3941,
+          "median_reliability": 0.5996878455001019
+        }
+      ]
+    },
+    {
+      "name": "T25",
+      "depth_mm": 8.0,
+      "n": 16974,
+      "qc_pass": 16638,
+      "dg_cells": 4080,
+      "clusters": 4,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 21,
+          "trustworthy": 3046,
+          "median_reliability": 0.3512734241307337
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 22,
+          "trustworthy": 3038,
+          "median_reliability": 0.35647878174296266
+        }
+      ]
+    },
+    {
+      "name": "T33",
+      "depth_mm": 10.0,
+      "n": 24041,
+      "qc_pass": 23402,
+      "dg_cells": 5610,
+      "clusters": 7,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 21,
+          "trustworthy": 5370,
+          "median_reliability": 0.5099889175108254
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 20,
+          "trustworthy": 5351,
+          "median_reliability": 0.5181197281064429
+        }
+      ]
+    },
+    {
+      "name": "T37",
+      "depth_mm": 10.99,
+      "n": 24155,
+      "qc_pass": 23294,
+      "dg_cells": 6519,
+      "clusters": 3,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 23,
+          "trustworthy": 4951,
+          "median_reliability": 0.3486154274942224
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 23,
+          "trustworthy": 5096,
+          "median_reliability": 0.3541671692832877
+        }
+      ]
+    },
+    {
+      "name": "T39",
+      "depth_mm": 11.49,
+      "n": 31702,
+      "qc_pass": 30507,
+      "dg_cells": 9010,
+      "clusters": 7,
+      "scdeed": [
+        {
+          "min_dist": 0.1,
+          "dubious": 47,
+          "trustworthy": 8274,
+          "median_reliability": 0.4571893682238307
+        },
+        {
+          "min_dist": 0.5,
+          "dubious": 50,
+          "trustworthy": 8288,
+          "median_reliability": 0.46513934306753496
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "um_per_unit": 0.5,
+    "seed": 20261024,
+    "n_hvg": 2000,
+    "n_pcs": 20,
+    "n_neighbors": 15,
+    "leiden_resolution": 0.5,
+    "qc_mad_k": 3.0,
+    "normalisation": "counts per 10,000 then log1p",
+    "de": "Wilcoxon, cluster vs rest, DG cells",
+    "scdeed": "similarity_percent 0.5, dubious < null 5th pct, trustworthy > null 95th pct"
+  }
+}
