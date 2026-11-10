@@ -62,19 +62,7 @@ This is the recommended method, including when a browser displays a blank page o
 
 After fully extracting the project, you can try double-clicking `index.html` (guided tour) or `explore.html` (free exploration). Some browsers restrict local-file access and may fail to load data in this mode. If so, use the local server instructions above. Chrome is tested; Edge, Firefox, and Safari have not been fully verified.
 
-## 3. Record a demonstration video (optional)
-
-Once the local explorer loads successfully:
-
-1. Keep the VS Code terminal/server running and display the explorer in Chrome.
-2. On Windows 11, press **Windows + Shift + R** to start a screen recording with Snipping Tool (or open Snipping Tool and select its recording mode).
-3. Select the browser area and start recording.
-4. Demonstrate the guided tour, 3D section stack, tissue maps, UMAP views, section selection, gene-expression coloring, and evidence panels.
-5. Stop and save the recording (typically as an `.mp4`).
-
-The recording is a standalone video: viewers do **not** need the local server to watch it. They *do* need the downloaded project and a running local server to interact with the explorer themselves.
-
-## 4. Troubleshooting
+## 3. Troubleshooting
 
 | Symptom | Likely cause and fix |
 | --- | --- |
@@ -86,13 +74,13 @@ The recording is a standalone video: viewers do **not** need the local server to
 | `favicon.ico` 404 in the terminal | A browser requested an optional site icon; this message does not prevent the explorer from working. |
 | Someone else cannot open your `localhost` link | `localhost` refers to **their** computer, not yours. They must download the repository and run it locally, or the project must be deployed on a separate public hosting service. |
 
-## 5. Research questions
+## 4. Research questions
 
 1. **Where are cells and genes?** How do cell-type composition and regional gene-expression patterns vary across hippocampal subregions and sections?
 2. **What distinguishes DG cell groups, and is there evidence of a neural stem-cell niche?** Can clustering, marker expression, and spatial proximity help evaluate candidate neural stem-cell-like populations?
 3. **How reliable are the UMAP representations?** Which positions preserve local expression neighborhoods, and which may be misleading?
 
-## 6. Explore the interface
+## 5. Explore the interface
 
 | View or control | Purpose |
 | --- | --- |
@@ -119,7 +107,7 @@ The recording is a standalone video: viewers do **not** need the local server to
 
 Use **Next** (or the arrow keys where supported) to advance through the guided tour. **Exit tour** opens free exploration, and **Start tour** restores the walkthrough. For further instructions and figures, see [Explorer_Guide.pdf](Explorer_Guide.pdf).
 
-## 7. Data availability and processing
+## 6. Data availability and processing
 
 ### What is included
 
@@ -153,7 +141,7 @@ The summary records a random seed of `20261024`. The explorer also includes brow
 
 **Reproducibility limitation:** This repository contains **processed datasets, application code, and processing metadata**, but **not the original raw-data preprocessing scripts or a complete executable environment for rebuilding the processed data from scratch**. The steps above describe recorded settings, not an independently verified end-to-end reconstruction procedure. Recreating all data products would require the original input data, preprocessing scripts, and dependency versions.
 
-## 8. Summary of findings
+## 7. Summary of findings
 
 These findings are **exploratory** and refer to the sampled sections. The detailed analysis, figures, interpretation, and citations are in [Explorer_Guide.pdf](Explorer_Guide.pdf); stored quantitative results are in [`data/findings.json`](data/findings.json).
 
@@ -174,7 +162,7 @@ These findings are **exploratory** and refer to the sampled sections. The detail
 - scDEED flagged about **0.3–0.6%** of DG cells per section as potentially misleading under the examined UMAP settings.
 - The settings were similar overall, but flagged partly different cells. Small clusters warrant extra care in interpretation.
 
-## 9. Scientific and technical limitations
+## 8. Scientific and technical limitations
 
 - **Sampling:** Seven of 30 available sections from **one animal** are shown; results are not multi-animal population estimates.
 - **Cell identity:** Published cell annotations and marker-score candidates are not experimentally confirmed identities; stem-cell-like scores do not prove neural stem-cell identity.
@@ -185,7 +173,7 @@ These findings are **exploratory** and refer to the sampled sections. The detail
 - **Browser compatibility:** Chrome has been tested; other browsers have not been comprehensively tested.
 - **Reprocessing:** Complete raw-data preparation scripts and exact environment specifications are not distributed with this repository.
 
-## 10. Repository structure and code organization
+## 9. Repository structure and code organization
 
 ```text
 project-SpatiOmicsVism-main/
@@ -220,7 +208,7 @@ project-SpatiOmicsVism-main/
 
 The application is primarily **HTML, CSS, and JavaScript**; `serve.py` serves its static files. The included data supports the interface without a Python backend or a separate running analysis service. Keep all directories and their relative paths intact.
 
-## 11. Reference and authors
+## 10. Reference and authors
 
 **Data source:** Fei, T., Dong, Y., Gou, X., et al. (2026). *Evolutionary convergence and divergence of hippocampal cytoarchitecture between rodents and primates revealed by single-cell spatial transcriptomics.* **National Science Review, 13**(5), nwaf595. https://doi.org/10.1093/nsr/nwaf595
 
